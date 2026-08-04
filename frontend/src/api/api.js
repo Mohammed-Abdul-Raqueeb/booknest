@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "http://localhost:8080/api",
+  baseURL: "https://library-management-system-xzos.onrender.com",
 });
 
 // Attach the JWT issued at login/register (if any) to every outgoing request.
