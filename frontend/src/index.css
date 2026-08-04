@@ -1,0 +1,235 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap");
+
+/* ---------------------------------------------------------------------- */
+/* Design tokens                                                          */
+/* ---------------------------------------------------------------------- */
+@theme {
+  /* surfaces */
+  --color-base: #08070d;
+  --color-base-raised: #0f0e17;
+  --color-surface: #14131f;
+
+  /* ink (text) */
+  --color-ink: #f3f1f7;
+  --color-ink-muted: #a8a4b8;
+  --color-ink-faint: #6b6779;
+
+  /* violet system */
+  --color-violet: #8b5cf6;
+  --color-violet-deep: #5b21b6;
+  --color-violet-soft: #c4b5fd;
+
+  /* status signals */
+  --color-signal-available: #34d399;
+  --color-signal-borrowed: #fbbf24;
+  --color-signal-fine: #fb7185;
+
+  /* type */
+  --font-display: "Fraunces", ui-serif, Georgia, serif;
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* shadows */
+  --shadow-glow-sm: 0 0 24px rgba(139, 92, 246, 0.18);
+  --shadow-glow: 0 0 48px rgba(139, 92, 246, 0.28);
+  --shadow-glow-lg: 0 20px 80px -10px rgba(139, 92, 246, 0.35);
+
+  /* animations */
+  --animate-fade-in-up: fade-in-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+  --animate-glow-pulse: glow-pulse 6s ease-in-out infinite;
+  --animate-scale-in: scale-in 0.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes glow-pulse {
+    0%,
+    100% {
+      opacity: 0.55;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 0.9;
+      transform: scale(1.08);
+    }
+  }
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.97);
+    }
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Base                                                                    */
+/* ---------------------------------------------------------------------- */
+html {
+  color-scheme: dark;
+}
+
+body {
+  background-color: var(--color-base);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(139, 92, 246, 0.12), transparent),
+    radial-gradient(ellipse 60% 40% at 100% 10%, rgba(91, 33, 182, 0.1), transparent);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+* {
+  scrollbar-color: rgba(139, 92, 246, 0.35) transparent;
+  scrollbar-width: thin;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.35);
+  border-radius: 999px;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-violet);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ---------------------------------------------------------------------- */
+/* Reusable component classes                                             */
+/* ---------------------------------------------------------------------- */
+@layer components {
+  .glass-panel {
+    background: rgba(20, 19, 31, 0.55);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .glass-card {
+    background: rgba(20, 19, 31, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 1rem;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    background: linear-gradient(135deg, var(--color-violet), var(--color-violet-deep));
+    padding: 0.7rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: white;
+    box-shadow: var(--shadow-glow-sm);
+    transition: all 0.2s ease;
+  }
+  .btn-primary:hover {
+    box-shadow: var(--shadow-glow);
+    transform: translateY(-1px);
+  }
+  .btn-primary:active {
+    transform: translateY(0);
+  }
+  .btn-primary:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+    transform: none;
+  }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.7rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-ink);
+    transition: all 0.2s ease;
+  }
+  .btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba(139, 92, 246, 0.4);
+  }
+
+  .btn-danger {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(251, 113, 133, 0.3);
+    background: rgba(251, 113, 133, 0.08);
+    padding: 0.7rem 1.25rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--color-signal-fine);
+    transition: all 0.2s ease;
+  }
+  .btn-danger:hover {
+    background: rgba(251, 113, 133, 0.16);
+  }
+
+  .input-field {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.03);
+    padding: 0.65rem 0.9rem;
+    font-size: 0.875rem;
+    color: var(--color-ink);
+    transition: border-color 0.2s ease;
+  }
+  .input-field::placeholder {
+    color: var(--color-ink-faint);
+  }
+  .input-field:focus {
+    outline: none;
+    border-color: rgba(139, 92, 246, 0.5);
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    border-radius: 999px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+}
