@@ -29,7 +29,7 @@ export default function Login() {
     try {
       const res =
         mode === "login"
-          ? await API.post("/students/login", {
+          ? await API.post("/api/students/login", {
               identifier: form.identifier,
               password: form.password,
             })
