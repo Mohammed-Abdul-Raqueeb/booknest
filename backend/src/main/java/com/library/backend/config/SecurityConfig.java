@@ -37,44 +37,108 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .headers(headers -> headers.frameOptions(frame -> frame.sameOrigin()))
+            .sessionManagement(session -> 
+                session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            )
+            .headers(headers -> 
+                headers.frameOptions(frame -> frame.sameOrigin())
+            )
             .authorizeHttpRequests(auth -> auth
-                // Public endpoints
-                .requestMatchers(HttpMethod.POST, "/api/students/register", "/api/students/login").permitAll()
+
+                // Allow frontend login/register
+                .requestMatchers(
+                    HttpMethod.POST,
+                    "/api/students/register",
+                    "/api/students/login",
+                    "/students/register",
+                    "/students/login"
+                ).permitAll()
+
+                // Public book browsing
                 .requestMatchers(HttpMethod.GET, "/api/books/**").permitAll()
+
+                // H2 console
                 .requestMatchers("/h2-console/**").permitAll()
+
+                // Allow browser preflight requests
                 .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
 
-                // Admin-only endpoints
-                .requestMatchers(HttpMethod.POST, "/api/books/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/api/books/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/api/books/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/api/students").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.DELETE, "/api/students/**").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/api/borrow").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.GET, "/api/borrow/active").hasRole("ADMIN")
-                .requestMatchers(HttpMethod.PUT, "/api/borrow/return/**").hasRole("ADMIN")
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
 
-                // Everything else just needs a valid, logged-in user
+                // Admin routes
+                .requestMatchers(HttpMethod.POST, "/api/books/**")
+                    .hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.PUT, "/api/books/**")
+                    .hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.DELETE, "/api/books/**")
+                    .hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.GET, "/api/students")
+                    .hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.DELETE, "/api/students/**")
+                    .hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.GET, "/api/borrow")
+                    .hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.GET, "/api/borrow/active")
+                    .hasRole("ADMIN")
+
+                .requestMatchers(HttpMethod.PUT, "/api/borrow/return/**")
+                    .hasRole("ADMIN")
+
+                .requestMatchers("/api/admin/**")
+                    .hasRole("ADMIN")
+
+
+                // Everything else requires login
                 .anyRequest().authenticated()
             )
-            .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(
+                jwtAuthenticationFilter,
+                UsernamePasswordAuthenticationFilter.class
+            );
 
         return http.build();
     }
 
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(List.of("http://localhost:*", "http://127.0.0.1:*"));
-        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
+
+        configuration.setAllowedOriginPatterns(
+            List.of(
+                "http://localhost:*",
+                "http://127.0.0.1:*",
+                "https://*.vercel.app"
+            )
+        );
+
+        configuration.setAllowedMethods(
+            List.of(
+                "GET",
+                "POST",
+                "PUT",
+                "DELETE",
+                "PATCH",
+                "OPTIONS"
+            )
+        );
+
         configuration.setAllowedHeaders(List.of("*"));
+
         configuration.setAllowCredentials(true);
 
-        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+
+        UrlBasedCorsConfigurationSource source =
+                new UrlBasedCorsConfigurationSource();
+
         source.registerCorsConfiguration("/**", configuration);
+
         return source;
     }
 }
