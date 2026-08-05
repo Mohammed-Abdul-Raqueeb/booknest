@@ -49,7 +49,7 @@ export default function AdminDashboard() {
             <LibraryBig size={18} className="text-white" />
           </span>
           <div className="min-w-0">
-            <p className="truncate font-display text-base font-semibold text-ink">Library System</p>
+            <p className="truncate font-display text-base font-semibold text-ink">BookNest</p>
             <p className="text-xs text-ink-faint">Admin console</p>
           </div>
         </div>

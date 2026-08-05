@@ -37,7 +37,7 @@ export default function Contact() {
           Contact us
         </h1>
         <p className="mt-2 text-sm leading-relaxed text-ink-muted sm:text-base">
-          Questions, issues, or feedback about the library system — send it over.
+          Questions, issues, or feedback about the BookNest — send it over.
         </p>
 
         <div className="glass-card mt-8 p-6 sm:p-8">

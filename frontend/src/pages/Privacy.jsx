@@ -26,7 +26,7 @@ export default function Privacy() {
 
         <div className="glass-card mt-8 space-y-6 p-6 sm:p-8">
           <PolicySection title="What we store">
-            Your name, email, and student ID are stored by the library system to run your account — sign you in,
+            Your name, email, and student ID are stored by the BookNest to run your account — sign you in,
             show your borrowing history, and let you reserve books.
           </PolicySection>
           <PolicySection title="Bookmarks stay local">

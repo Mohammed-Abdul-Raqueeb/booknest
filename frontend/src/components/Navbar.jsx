@@ -97,7 +97,7 @@ export default function Navbar({ onMenuClick, user, bookmarkCount = 0, onSearch,
                 <LibraryBig size={18} className="text-white" />
               </span>
               <span className="hidden truncate font-display text-lg font-semibold tracking-tight text-ink sm:block">
-                Library System
+                BookNest
               </span>
             </Link>
           </div>

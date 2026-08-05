@@ -52,7 +52,7 @@ export default function Sidebar({ isOpen, onClose }) {
             <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-violet to-violet-deep shadow-glow-sm">
               <LibraryBig size={18} className="text-white" />
             </span>
-            <span className="font-display text-lg font-semibold text-ink">Library System</span>
+            <span className="font-display text-lg font-semibold text-ink">BookNest</span>
           </div>
           <button
             onClick={onClose}
@@ -85,7 +85,7 @@ export default function Sidebar({ isOpen, onClose }) {
         </nav>
 
         <div className="px-5 py-5 text-xs text-ink-faint">
-          © {new Date().getFullYear()} Library System
+          © {new Date().getFullYear()} BookNest
         </div>
       </aside>
     </>

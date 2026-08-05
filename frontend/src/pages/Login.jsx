@@ -87,7 +87,7 @@ export default function Login() {
             </span>
 
             <span className="font-display text-xl font-semibold text-ink">
-              Library System
+              BookNest
             </span>
           </div>
 
@@ -104,7 +104,7 @@ export default function Login() {
           </div>
 
           <p className="text-xs text-ink-faint">
-            © {new Date().getFullYear()} Library System
+            © {new Date().getFullYear()} BookNest
           </p>
         </div>
 

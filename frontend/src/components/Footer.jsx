@@ -46,7 +46,7 @@ export default function Footer() {
               </span>
 
               <span className="font-display text-sm font-semibold text-ink">
-                Library System
+                BookNest
               </span>
             </Link>
 
@@ -147,7 +147,7 @@ export default function Footer() {
 
 
         <div className="mt-10 border-t border-white/[0.06] pt-6 text-center text-xs text-ink-faint sm:text-left">
-          © {new Date().getFullYear()} Library System. Built for readers.
+          © {new Date().getFullYear()} BookNest. Built for readers.
         </div>
 
 
