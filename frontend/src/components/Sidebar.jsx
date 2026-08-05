@@ -43,7 +43,7 @@ export default function Sidebar({ isOpen, onClose }) {
       {/* Drawer */}
       <aside
         className={`fixed inset-y-0 left-0 z-50 flex w-72 max-w-[80vw] flex-col glass-panel border-y-0 border-l-0
-          shadow-glow-lg transition-transform duration-300 ease-out lg:hidden ${
+          shadow-glow-lg transition-transform duration-300 ease-out ${
             isOpen ? "translate-x-0" : "-translate-x-full"
           }`}
       >
