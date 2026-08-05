@@ -45,7 +45,7 @@ export default function MyBorrowings() {
     async function load() {
       try {
         setLoading(true);
-        const res = await API.get(`/borrow/student/${parsedStudent.id}`);
+        const res = await API.get(`/api/borrow/student/${parsedStudent.id}`);
         if (!cancelled) setRecords(res.data || []);
       } catch (err) {
         if (!cancelled) setError(err?.response?.data?.message || "Couldn't load your borrowings.");
