@@ -188,7 +188,7 @@ function BooksTab() {
   async function loadBooks() {
     try {
       setLoading(true);
-      const res = await API.get("/books");
+      const res = await API.get("/api/books");
       setBooks(res.data || []);
       setError("");
     } catch (err) {
@@ -235,9 +235,9 @@ function BooksTab() {
         rating: form.rating === "" ? null : Number(form.rating),
       };
       if (editingBook) {
-        await API.put(`/books/${editingBook.id}`, payload);
+        await API.put(`/api/books/${editingBook.id}`, payload);
       } else {
-        await API.post("/books", payload);
+        await API.post("/api/books", payload);
       }
       setFormOpen(false);
       await loadBooks();
@@ -252,7 +252,7 @@ function BooksTab() {
     setDeletingId(book.id);
     setActionError("");
     try {
-      await API.delete(`/books/${book.id}`);
+      await API.delete(`/api/books/${book.id}`);
       await loadBooks();
     } catch (err) {
       setActionError(err?.response?.data?.message || "Couldn't delete this book.");
