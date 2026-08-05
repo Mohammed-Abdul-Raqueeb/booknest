@@ -29,9 +29,9 @@ export default function StudentDashboard() {
     async function load() {
       try {
         setLoading(true);
-        const requests = [API.get("/books")];
+        const requests = [API.get("/api/books")];
         if (parsedStudent?.id) {
-          requests.push(API.get(`/borrow/student/${parsedStudent.id}`));
+          requests.push(API.get(`/api/borrow/student/${parsedStudent.id}`));
         }
         const [booksRes, borrowRes] = await Promise.all(requests);
         if (!cancelled) {
@@ -58,7 +58,7 @@ export default function StudentDashboard() {
     }
     try {
       const book = books.find((b) => b.id === bookId);
-      await API.post(`/borrow/${student.id}/${bookId}`);
+      await API.post(`/api/borrow/${student.id}/${bookId}`);
       // reflect the change immediately without a full refetch
       setBooks((prev) => prev.map((b) => (b.id === bookId ? { ...b, available: false } : b)));
       setToast(book ? `Borrowed "${book.title}"` : "Book borrowed successfully");
@@ -66,7 +66,7 @@ export default function StudentDashboard() {
       // refresh this student's real borrow history so the stat card and
       // My Borrowings stay accurate
       try {
-        const res = await API.get(`/borrow/student/${student.id}`);
+        const res = await API.get(`/api/borrow/student/${student.id}`);
         setBorrowRecords(res.data || []);
       } catch {
         // non-fatal — the borrow itself succeeded, just couldn't refresh the count
