@@ -50,7 +50,7 @@ export default function Browse() {
     async function load() {
       try {
         setLoading(true);
-        const res = await API.get("/books");
+        const res = await API.get("/api/books");
         if (!cancelled) setBooks(res.data || []);
       } catch (err) {
         if (!cancelled) setError(err?.response?.data?.message || "Couldn't load the book catalog.");
@@ -105,7 +105,7 @@ export default function Browse() {
     }
     try {
       const book = books.find((b) => b.id === bookId);
-      await API.post(`/borrow/${student.id}/${bookId}`);
+      await API.post(`/api/borrow/${student.id}/${bookId}`);
       setBooks((prev) => prev.map((b) => (b.id === bookId ? { ...b, available: false } : b)));
       setToast(book ? `Borrowed "${book.title}"` : "Book borrowed successfully");
     } catch (err) {

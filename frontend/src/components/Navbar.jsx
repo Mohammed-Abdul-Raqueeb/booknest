@@ -78,7 +78,10 @@ export default function Navbar({ onMenuClick, user, bookmarkCount = 0, onSearch,
           {/* Left zone: hamburger + logo + branding */}
           <div className="flex min-w-0 items-center gap-2">
             <button
-              onClick={onMenuClick}
+              onClick={() => {
+                console.log("MENU CLICKED");
+                onMenuClick();
+              }}
               aria-label="Toggle menu"
               className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-ink-muted
                 transition-colors hover:bg-white/[0.06] hover:text-ink"
