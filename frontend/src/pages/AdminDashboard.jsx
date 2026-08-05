@@ -464,7 +464,7 @@ function StudentsTab() {
     async function load() {
       try {
         setLoading(true);
-        const res = await API.get("/students");
+        const res = await API.get("/api/students");
         if (!cancelled) setStudents(res.data || []);
       } catch (err) {
         if (!cancelled) setError(err?.response?.data?.message || "Couldn't load students.");
@@ -556,7 +556,7 @@ function BorrowingTab() {
   async function loadRecords() {
     try {
       setLoading(true);
-      const res = await API.get("/borrow");
+      const res = await API.get("/api/borrow");
       setRecords(res.data || []);
       setError("");
     } catch (err) {
@@ -574,7 +574,7 @@ function BorrowingTab() {
     setReturningId(record.id);
     setActionError("");
     try {
-      await API.put(`/borrow/return/${record.id}`);
+      await API.put(`/api/borrow/return/${record.id}`);
       await loadRecords();
     } catch (err) {
       setActionError(err?.response?.data?.message || "Couldn't mark this book as returned.");
