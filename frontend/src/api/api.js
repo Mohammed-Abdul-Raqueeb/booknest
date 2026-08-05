@@ -1,9 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: "https://library-management-system-xzos.onrender.com",
+  baseURL: "https://library-management-system-xzos.onrender.com/api",
 });
-
 // Attach the JWT issued at login/register (if any) to every outgoing request.
 API.interceptors.request.use((config) => {
   const stored = localStorage.getItem("student");
