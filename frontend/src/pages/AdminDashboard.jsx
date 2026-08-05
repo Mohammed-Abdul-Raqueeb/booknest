@@ -122,7 +122,7 @@ function OverviewTab() {
     async function load() {
       try {
         setLoading(true);
-        const res = await API.get("/admin/statistics");
+        const res = await API.get("/api/admin/statistics");
         if (!cancelled) setStats(res.data);
       } catch (err) {
         if (!cancelled) setError(err?.response?.data?.message || "Couldn't load statistics.");
