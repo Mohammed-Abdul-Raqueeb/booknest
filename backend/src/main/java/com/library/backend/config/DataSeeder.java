@@ -4,19 +4,22 @@ import com.library.backend.model.Role;
 import com.library.backend.model.Student;
 import com.library.backend.repository.StudentRepository;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-/**
- * Ensures a default administrator account exists.
- * Creates the admin user only if it does not already exist.
- */
 @Component
 public class DataSeeder implements CommandLineRunner {
 
     private final StudentRepository studentRepository;
     private final PasswordEncoder passwordEncoder;
+
+    @Value("${ADMIN_USERNAME}")
+    private String adminUsername;
+
+    @Value("${ADMIN_PASSWORD}")
+    private String adminPassword;
 
     public DataSeeder(StudentRepository studentRepository, PasswordEncoder passwordEncoder) {
         this.studentRepository = studentRepository;
@@ -25,13 +28,17 @@ public class DataSeeder implements CommandLineRunner {
 
     @Override
     public void run(String... args) {
-        if (studentRepository.findByUsername("admin").isEmpty()) {
+
+        if (studentRepository.findByUsername(adminUsername).isEmpty()) {
+
             Student admin = new Student();
+
             admin.setFullName("Library Admin");
-            admin.setUsername("admin");
+            admin.setUsername(adminUsername);
             admin.setEmail("admin@library.system");
-            admin.setPassword(passwordEncoder.encode("xxxxxxxx"));
+            admin.setPassword(passwordEncoder.encode(adminPassword));
             admin.setRole(Role.ADMIN);
+
             studentRepository.save(admin);
         }
     }
