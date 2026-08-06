@@ -9,13 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 /**
- * Ensures a default administrator account exists so the admin dashboard is
- * reachable on a fresh database. Safe to run on every startup — it only
- * inserts the admin user if one doesn't already exist.
- *
- * Default credentials (change after first login in a real deployment):
- *   username: admin
- *   password: Admin@123
+ * Ensures a default administrator account exists.
+ * Creates the admin user only if it does not already exist.
  */
 @Component
 public class DataSeeder implements CommandLineRunner {
@@ -35,7 +30,7 @@ public class DataSeeder implements CommandLineRunner {
             admin.setFullName("Library Admin");
             admin.setUsername("admin");
             admin.setEmail("admin@library.system");
-            admin.setPassword(passwordEncoder.encode("Admin@123"));
+            admin.setPassword(passwordEncoder.encode("xxxxxxxx"));
             admin.setRole(Role.ADMIN);
             studentRepository.save(admin);
         }
