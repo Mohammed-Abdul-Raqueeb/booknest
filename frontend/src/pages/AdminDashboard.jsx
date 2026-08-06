@@ -119,42 +119,137 @@ function OverviewTab() {
 
   useEffect(() => {
     let cancelled = false;
+
     async function load() {
       try {
         setLoading(true);
         const res = await API.get("/api/admin/statistics");
+
         if (!cancelled) setStats(res.data);
+
       } catch (err) {
-        if (!cancelled) setError(err?.response?.data?.message || "Couldn't load statistics.");
+        if (!cancelled)
+          setError(err?.response?.data?.message || "Couldn't load statistics.");
       } finally {
         if (!cancelled) setLoading(false);
       }
     }
+
     load();
+
     return () => {
       cancelled = true;
     };
   }, []);
 
+
   return (
     <section className="animate-fade-in-up">
-      <h1 className="font-display text-3xl font-semibold tracking-tight text-ink">Overview</h1>
-      <p className="mt-2 text-sm text-ink-muted">A snapshot of the library's current state.</p>
+
+      <h1 className="font-display text-3xl font-semibold tracking-tight text-ink">
+        Welcome back, Admin 👋
+      </h1>
+
+      <p className="mt-2 text-sm text-ink-muted">
+        Here's what's happening in your library today.
+      </p>
+
 
       {error && (
-        <p className="mt-4 rounded-lg bg-signal-fine/10 px-4 py-3 text-sm text-signal-fine ring-1 ring-inset ring-signal-fine/30">
+        <p className="mt-4 rounded-lg bg-signal-fine/10 px-4 py-3 text-sm text-signal-fine">
           {error}
         </p>
       )}
 
+
+      {/* Statistics */}
+
       <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        <StatCard icon={BookOpen} label="Total books" value={loading ? "—" : stats?.totalBooks ?? 0} tone="violet" />
-        <StatCard icon={CheckCircle2} label="Available now" value={loading ? "—" : stats?.availableBooks ?? 0} tone="available" />
-        <StatCard icon={BookMarked} label="Currently borrowed" value={loading ? "—" : stats?.borrowedBooks ?? 0} tone="borrowed" />
-        <StatCard icon={GraduationCap} label="Total students" value={loading ? "—" : stats?.totalStudents ?? 0} tone="violet" />
-        <StatCard icon={Clock} label="Active borrows" value={loading ? "—" : stats?.activeBorrows ?? 0} tone="borrowed" />
-        <StatCard icon={AlertTriangle} label="Overdue books" value={loading ? "—" : stats?.overdueBorrows ?? 0} tone="fine" />
+
+        <StatCard
+          icon={BookOpen}
+          label="Total books"
+          value={loading ? "—" : stats?.totalBooks ?? 0}
+          tone="violet"
+        />
+
+        <StatCard
+          icon={CheckCircle2}
+          label="Available books"
+          value={loading ? "—" : stats?.availableBooks ?? 0}
+          tone="available"
+        />
+
+        <StatCard
+          icon={BookMarked}
+          label="Borrowed books"
+          value={loading ? "—" : stats?.borrowedBooks ?? 0}
+          tone="borrowed"
+        />
+
+        <StatCard
+          icon={GraduationCap}
+          label="Total students"
+          value={loading ? "—" : stats?.totalStudents ?? 0}
+          tone="violet"
+        />
+
+        <StatCard
+          icon={Clock}
+          label="Active borrows"
+          value={loading ? "—" : stats?.activeBorrows ?? 0}
+          tone="borrowed"
+        />
+
+        <StatCard
+          icon={AlertTriangle}
+          label="Overdue books"
+          value={loading ? "—" : stats?.overdueBorrows ?? 0}
+          tone="fine"
+        />
+
       </div>
+
+
+      {/* Quick actions */}
+
+      <div className="mt-8 grid grid-cols-1 gap-4 md:grid-cols-3">
+
+        <div className="glass-card p-5">
+          <h3 className="font-display text-lg font-semibold text-ink">
+            📚 Manage Books
+          </h3>
+
+          <p className="mt-2 text-sm text-ink-muted">
+            Add, edit and remove books from your catalog.
+          </p>
+        </div>
+
+
+        <div className="glass-card p-5">
+          <h3 className="font-display text-lg font-semibold text-ink">
+            👥 Manage Students
+          </h3>
+
+          <p className="mt-2 text-sm text-ink-muted">
+            View registered student accounts.
+          </p>
+        </div>
+
+
+        <div className="glass-card p-5">
+          <h3 className="font-display text-lg font-semibold text-ink">
+            🔄 Borrow Records
+          </h3>
+
+          <p className="mt-2 text-sm text-ink-muted">
+            Track borrowed and returned books.
+          </p>
+        </div>
+
+      </div>
+
+
     </section>
   );
 }
