@@ -1,166 +1,217 @@
-# Library Management System
+# 📚 BookNest
 
-A Java-based Library Management System built using Java, JDBC, Maven, and SQLite.
+A modern **full-stack library management system** built with **React, Spring Boot, and SQLite**.
 
-## Features
+BookNest is a digital library platform that allows students to explore books, manage their borrowing activity, and provides administrators with tools to manage books, students, and library operations.
 
-## Admin Features
-
-- Admin Login
-- Add Books
-- View All Books
-- Search Books
-  - Search by Title
-  - Search by Author
-  - Search by Category
-  - Search by ISBN
-- Update Books
-- Delete Books
-- Borrow Books
-- Return Books
-- View Borrow History
-- Dashboard Statistics
-- View Registered Students
-- View Overdue Books
-- Automatic Fine Calculation
-
-## Student Features
-
-- Student Registration
-- Student Login
-- View Available Books
-- Search Books
-- Borrow Books
-- Return Books
-- View Borrow History
+🌐 **Live Demo:** https://booknest.vercel.app/
 
 ---
 
-## Technologies Used
+# ✨ Features
+
+## 👨‍🎓 Student Features
+
+- 🔐 Student registration and login
+- 📚 Browse available books
+- 🔍 Search books by title and author
+- 🏷️ Filter books by category
+- ⭐ View book ratings and details
+- 📖 Borrow books
+- 📋 View borrowing history
+- 🔖 Bookmark favourite books
+- 💰 Track fines and due dates
+
+
+## 🛡️ Admin Features
+
+- 🔐 Admin authentication
+- 📊 Library overview dashboard
+- 📚 Add, edit, and delete books
+- 👥 Manage registered students
+- 🔄 Manage borrowing records
+- ✅ Mark returned books
+- 📈 View library statistics
+
+---
+
+# 🛠️ Tech Stack
+
+## Frontend
+
+<p>
+<img src="https://skillicons.dev/icons?i=react,vite,tailwind,js" />
+</p>
+
+- React.js
+- Vite
+- Tailwind CSS
+- JavaScript
+
+
+## Backend
+
+<p>
+<img src="https://skillicons.dev/icons?i=java,spring" />
+</p>
 
 - Java
-- JDBC
-- SQLite Database
-- Maven
-- Object-Oriented Programming (OOP)
+- Spring Boot
+- Spring Data JPA
+- Spring Security
 
----
-
-## Project Structure
-
-```
-src/main/java/com/library
-
-├── config
-│   └── DatabaseConnection.java
-│
-├── model
-│   ├── Book.java
-│   ├── Student.java
-│   └── BorrowRecord.java
-│
-├── repository
-│   ├── BookRepository.java
-│   ├── StudentRepository.java
-│   └── BorrowRepository.java
-│
-├── service
-│   ├── AdminService.java
-│   ├── StudentService.java
-│   ├── BookService.java
-│   ├── BorrowService.java
-│   └── FineService.java
-│
-└── Main.java
-```
-
----
 
 ## Database
 
-The system uses SQLite database.
+<p>
+<img src="https://skillicons.dev/icons?i=sqlite" />
+</p>
 
-### Books Table
-
-Stores:
-
-- Book ID
-- Title
-- Author
-- Category
-- ISBN
-- Availability Status
-
-
-### Students Table
-
-Stores:
-
-- Student ID
-- Full Name
-- Username
-- Email
-- Password
-
-
-### Borrow Records Table
-
-Stores:
-
-- Student ID
-- Book ID
-- Borrow Date
-- Due Date
-- Return Date
-- Return Status
+- SQLite
+- Hibernate ORM
 
 ---
 
-## Fine Calculation
+# 📸 Screenshots
 
-- Borrow period: 14 days
-- Fine: ₹10 per late day
+## 🔐 Login Page
 
-Example:
+<img width="1915" height="933" alt="image" src="https://github.com/user-attachments/assets/296a7245-fb37-4875-b439-edc2cbb8709e" />
+
+
+
+## 👨‍🎓 Student Dashboard
+
+<img width="1916" height="940" alt="image" src="https://github.com/user-attachments/assets/53e401b1-13d7-4144-abff-685af08dc47d" />
+
+
+
+## 📚 Browse Books
+
+<img width="1912" height="863" alt="image" src="https://github.com/user-attachments/assets/5e5aa172-3749-4522-82b1-bc2f3cf0814d" />
+
+
+
+## 📖 My Borrowings
+
+<img width="1918" height="937" alt="image" src="https://github.com/user-attachments/assets/d520dab1-55cd-4497-8660-f6b76c3d3484" />
+
+
+
+## 🛡️ Admin Dashboard
+
+<img width="1895" height="798" alt="image" src="https://github.com/user-attachments/assets/dde14e9f-6874-48e6-b0b2-a275013b0d1e" />
+
+
+
+## 📚 Manage Books
+
+<img width="1902" height="709" alt="image" src="https://github.com/user-attachments/assets/7a676fe0-5210-47e6-adb0-3cd078549613" />
+
+
+
+## 🔄 Borrow Management
+
+<img width="1898" height="568" alt="image" src="https://github.com/user-attachments/assets/d48cd3c4-8994-438d-bbde-dbe9a35d1182" />
+)
+
+---
+
+# 🏗️ Project Structure
 
 ```
-Late Days : 3
-Fine      : ₹30
+BookNest
+│
+├── frontend
+│   ├── React
+│   ├── Vite
+│   └── Tailwind CSS
+│
+└── backend
+    ├── Spring Boot
+    ├── Java
+    └── SQLite
 ```
 
 ---
 
-## How To Run
+# 🚀 Installation & Setup
 
-### Requirements
+## Prerequisites
 
-- Java 17 or above
+Make sure you have installed:
+
+- Java JDK 17+
+- Node.js
 - Maven
 
-### Compile Project
 
-```
-mvn clean compile
+## Frontend Setup
+
+```bash
+cd frontend
+
+npm install
+
+npm run dev
 ```
 
-### Run Project
 
-```
-mvn exec:java
+## Backend Setup
+
+```bash
+cd backend
+
+mvn spring-boot:run
 ```
 
 ---
 
-## Future Improvements
+# 📚 Application Modules
 
-- GUI Application
-- Web Version
-- Email Notifications
-- Online Database
-- Advanced User Roles
+## Student Module
+
+Handles:
+- Student authentication
+- Book browsing
+- Searching and filtering
+- Borrowing books
+- Borrow history tracking
+- Bookmark management
+
+
+## Admin Module
+
+Handles:
+- Dashboard statistics
+- Book management
+- Student management
+- Borrow management
+- Library monitoring
 
 ---
 
-## Author
+# 🔮 Future Improvements
 
-Library Management System Project
+- 📱 Mobile application
+- 📖 Online book reading system
+- ☁️ Cloud database migration
+- 📧 Email notifications
+- 📊 Advanced analytics dashboard
+- 🔔 Due date reminders
+- 🤖 AI-based book recommendations
+
+---
+
+# 👨‍💻 Author
+
+**Mohammed Abdul Raqueeb**
+
+GitHub:
+https://github.com/Mohammed-Abdul-Raqueeb
+
+---
+
+# 📄 License
+
+This project is created for educational and portfolio purposes.
