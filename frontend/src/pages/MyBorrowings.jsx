@@ -67,7 +67,7 @@ export default function MyBorrowings() {
       <main className="mx-auto w-full max-w-[1600px] flex-1 px-4 py-10 sm:px-6 lg:px-8">
         <section className="animate-fade-in-up">
           <h1 className="font-display text-3xl font-semibold tracking-tight text-ink sm:text-4xl">My borrowings</h1>
-          <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink-muted sm:text-base">
+          <p cl assName="mt-2 max-w-xl text-sm leading-relaxed text-ink-muted sm:text-base">
             Every book you've borrowed, its due date, and any fines attached to it.
           </p>
         </section>
