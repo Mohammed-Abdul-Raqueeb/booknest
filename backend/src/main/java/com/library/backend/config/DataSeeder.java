@@ -29,17 +29,19 @@ public class DataSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        if (studentRepository.findByUsername(adminUsername).isEmpty()) {
+        Student admin = studentRepository.findByUsername(adminUsername)
+                .orElseGet(() -> {
+                    Student newAdmin = new Student();
+                    newAdmin.setFullName("Library Admin");
+                    newAdmin.setUsername(adminUsername);
+                    newAdmin.setEmail("admin@library.system");
+                    newAdmin.setRole(Role.ADMIN);
+                    return newAdmin;
+                });
 
-            Student admin = new Student();
+        admin.setPassword(passwordEncoder.encode(adminPassword));
+        admin.setRole(Role.ADMIN);
 
-            admin.setFullName("Library Admin");
-            admin.setUsername(adminUsername);
-            admin.setEmail("admin@library.system");
-            admin.setPassword(passwordEncoder.encode(adminPassword));
-            admin.setRole(Role.ADMIN);
-
-            studentRepository.save(admin);
-        }
+        studentRepository.save(admin);
     }
 }
